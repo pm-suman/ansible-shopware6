@@ -1,0 +1,21 @@
+---
+
+- hosts: 54.209.220.93
+  become: true
+  user: ubuntu
+  tasks:
+
+    - name: update apt packages
+      apt:
+        update_cache: yes
+      when: ansible_distribution in ["Ubuntu", "Debian"]
+
+- hosts: 20.107.36.203
+  become: true
+  user: testuser
+  tasks:
+
+    - name: update apt packages
+      apt:
+        update_cache: yes
+      when: ansible_distribution in ["Ubuntu", "Debian"]
