@@ -1,16 +1,25 @@
 ---
 
-- hosts: 54.209.220.93
+- hosts: web-servers
   become: true
   user: ubuntu
   tasks:
 
-    - name: update apt packages
+    - name: install apache2
       apt:
+        name: apache2
         update_cache: yes
       when: ansible_distribution in ["Ubuntu", "Debian"]
 
-- hosts: 20.107.36.203
+    - name: copy file to server
+      copy:
+        src: somefile.txt
+        dest: /home/ubuntu/ansible-files/
+        owner: ubuntu
+        group: ubuntu
+        mode: 0644
+
+- hosts: pnm-test-servers
   become: true
   user: testuser
   tasks:
